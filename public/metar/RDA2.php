@@ -326,7 +326,7 @@ function teste2($dataS, $horaS)
 	return $teste;
 }
 
-$teste=teste2($data, $hora);
+//$teste=teste2($data, $hora);
 
 ?>
 
