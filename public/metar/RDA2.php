@@ -161,43 +161,14 @@ function tempo($METAR)
 	$ACAO = "consulta";
 	//$LOCAL = "www.redemet.intraer/old";  // 200.252.241.45 internet
 	$LOCAL = "redemet.decea.mil.br/old";  // 200.252.241.45 internetdecea
+	$WEBHOOK = "https://app.alexmuraro.com.br/webhook/0d9d3170-c0ba-44fe-98ee-e50640351f9e?localidade=";
+
 	//$echo("https://".$LOCAL."/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=".$METAR."&acao=localidade&tipo_msg[]=metar");
+	https://api-redemet.decea.mil.br/mensagens/consulta/localidade?id_localidade[]=SBNT&type[]=metar&type[]=aviso&api_key=ouyaq0gZ4pEyTFIz86fJyby2snpspM66yU728dB2
+	$handle = fopen($METAR . ".txt", 'r');
 
-	if (!$handle = fopen( "https://".$LOCAL."/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=".$METAR."&acao=localidade&tipo_msg[]=metar",'r'))
-	{
-		$handle = fopen($METAR . ".txt", 'r');
-
-		while (!feof($handle))
-		{
-			$texto = fgets($handle , 4096);
-		}
-
-		fclose($texto);
-        echo '<style type="text/css">';
-        echo '<!--';
-        echo 'body{background-color:red;color:white;font-size:32pt}';
-        echo '-->';
-        echo '</style>';
-	}
-	else
-	{
-		//enquanto houver resutados ele exibe na tela para o ajax
-		while (!feof($handle))
-		{
-			$buffer = fgets($handle, 4096);
-			if (strpos($buffer, 'METAR ' . $METAR) > 0) { $texto = $buffer; }
-			if (strpos($buffer, 'SPECI ' . $METAR) > 0) { $texto = $buffer; }
-		};
-
-		//fecha a URL solicitada
-		fclose($handle);
-
-		$nprimetable = strrpos($texto,$METAR);
-		$fechatable = strlen($texto);
-		$quantopula = $fechatable - $nprimetable ;
-		$texto = substr($texto, $nprimetable, $quantopula - 8);
-	}
-
+	
+	$texto = fgets($handle , 4096);
 	$fp = fopen($METAR . ".txt", "w");
 	fwrite($fp, $texto);
 	fclose($fp);
