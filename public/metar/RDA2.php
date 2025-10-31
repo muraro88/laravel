@@ -148,7 +148,7 @@ td { font-size:24pt; text-align:left; }
 </head>
 
 <?php
-	error_reporting(1); //desabilita os erros
+	error_reporting(0); //desabilita os erros
 
 	//Busca o resultado da busca	 
 	$METAR = "SBSC";
@@ -160,9 +160,10 @@ function tempo($METAR)
 	$TAF = "";
 	$ACAO = "consulta";
 	//$LOCAL = "www.redemet.intraer/old";  // 200.252.241.45 internet
-	$LOCAL = "www.redemet.decea.mil.br/old";  // 200.252.241.45 internet
+	$LOCAL = "redemet.decea.mil.br/old";  // 200.252.241.45 internetdecea
+	
 
-	if (!$handle = fopen( "http://".$LOCAL."/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=".$METAR."&acao=localidade&tipo_msg[]=metar",'r'))
+	if (!$handle = fopen( "https://".$LOCAL."/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=".$METAR."&acao=localidade&tipo_msg[]=metar",'r'))
 	{
 		$handle = fopen($METAR . ".txt", 'r');
 
