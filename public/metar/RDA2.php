@@ -287,9 +287,9 @@ function horacerta($dataS, $horaS)
 
 // Online??
 
-$online=horacerta($data,$hora);
-
-
+//$online=horacerta($data,$hora);
+$online = true;
+ 
 if (!$online){
 	$vento23G = "";
 	$vento05G = "";
