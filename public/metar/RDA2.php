@@ -148,10 +148,11 @@ td { font-size:24pt; text-align:left; }
 </head>
 
 <?php
-	error_reporting(1); //desabilita os erros
+	error_reporting(1); //desabilita os erros que aparecem na tela do usuario
 	// reduzir tempo de bloqueio em streams e aumentar tempo máximo de execução
 	@ini_set('default_socket_timeout', 5);
 	@set_time_limit(120);
+
 
 	//Busca o resultado da busca	 
 	$METAR = "SBSC";
