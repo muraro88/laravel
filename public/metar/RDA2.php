@@ -167,7 +167,7 @@ function tempo($METAR)
 	$LOCAL = "redemet.decea.mil.br/old";  // 200.252.241.45 internetdecea
 	// montar URL uma vez e usar um contexto de stream com timeout (seguro para fopen)
 	$url = "https://" . $LOCAL . "/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=" . $METAR . "&acao=localidade&tipo_msg[]=metar";
-	echo $url;
+	//echo $url;
 	$ctx = stream_context_create(array('http' => array('timeout' => 5)));
 	if (!($handle = @fopen($url, 'r', false, $ctx)))
 	{
