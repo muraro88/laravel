@@ -160,7 +160,7 @@ function tempo($METAR)
 	$TAF = "";
 	$ACAO = "consulta";
 	//$LOCAL = "www.redemet.intraer/old";  // 200.252.241.45 internet
-	$LOCAL = "www.redemet.aer.mil.br/old";  // 200.252.241.45 internet
+	$LOCAL = "www.redemet.decea.mil.br/old";  // 200.252.241.45 internet
 
 	if (!$handle = fopen( "http://".$LOCAL."/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=".$METAR."&acao=localidade&tipo_msg[]=metar",'r'))
 	{
