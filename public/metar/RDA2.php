@@ -148,7 +148,7 @@ td { font-size:24pt; text-align:left; }
 </head>
 
 <?php
-	error_reporting(0); //desabilita os erros
+	error_reporting(1); //desabilita os erros
 
 	//Busca o resultado da busca	 
 	$METAR = "SBSC";
