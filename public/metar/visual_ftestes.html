@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+  <meta http-equiv="refresh" content="300">
+<!--[if IE]><link rel="shortcut icon" href="/favicon.ico"><![endif]-->
+
+  <link rel="icon" href="/favicon.png">
+
+
+  <title>Visual APP-RJ</title>
+  <style type="text/css">
+<!--
+/* css visual */
+.visual {
+    margin-left:auto;
+    margin-right:auto;
+    border: 1px solid black;
+    width: 100%;
+    background: #66CDAA;
+    font: 12px Arial, Helvetica, sans-serif;
+    color: #666;
+}
+
+.visual td {
+    vertical-align: top;
+    border: 1px solid white;
+}
+
+.visual h1 {
+    font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    padding: 10px 10px 10px 10px;
+    display: block;
+    background: #C0E1FF;
+    border-bottom: 1px solid #B8DDFF;
+}
+
+.visual label {
+    display: block;
+    margin: 0px 0px 5px;
+    font-size: 71px
+}
+
+.visual a {
+    font-size: 16px
+}
+
+.visual input[type="text"], .visual input[type="email"], .visual textarea, .visual select {
+    width: 15%;
+    padding: 0px 0px 0px 0px;
+    border: 1px solid #C5E2FF;
+    background: #FBFBFB;
+    outline: 0;
+    -webkit-box-shadow:inset 0px 1px 6px #ECF3F5;
+    box-shadow: inset 0px 1px 6px #ECF3F5;
+    font: 200 12px/25px Arial, Helvetica, sans-serif;
+    height: 30px;
+}
+
+.visual .button{
+    padding: 10px 30px 10px 30px;
+    background: #66C1E4;
+    border: none;
+    color: #FFF;
+    box-shadow: 1px 1px 1px #4C6E91;
+    -webkit-box-shadow: 1px 1px 1px #4C6E91;
+    -moz-box-shadow: 1px 1px 1px #4C6E91;
+    text-shadow: 1px 1px 1px #5079A3;
+}
+
+.visual input[type="submit"]{
+    padding: 5px 20px 5px 20px;
+    background: #66C1E4;
+    border: none;
+    color: #000;
+    box-shadow: 1px 1px 1px #4C6E91;
+    -webkit-box-shadow: 1px 1px 1px #4C6E91;
+    -moz-box-shadow: 1px 1px 1px #4C6E91;
+    text-shadow: 1px 1px 1px #5079A3;
+    font-size: 16px;
+}
+
+.visual .button:hover{
+    background: #3EB1DD;
+}
+
+#azul{
+    background: blue;
+    padding: 10px 10px 10px 10px;
+    border: 4px solid #66CDAA;
+    width: 80%;
+    color: #FFF;
+    font-size: 20px
+}
+#verde{
+    background: green;
+    padding: 10px 10px 10px 10px;
+    border: 4px solid #66CDAA;
+    width: 80%;
+    color: #FFF;
+    font-size: 20px
+}
+#amarelo{
+    background: yellow;
+    padding: 10px 10px 10px 10px;
+    border: 4px solid #66CDAA;
+    width: 80%;
+    color: #000;
+    font-size: 20px
+}
+
+
+-->
+  </style>
+</head>
+
+<body>
+
+
+
+<table class="visual">
+
+  <tbody>
+    <tr>
+      <td align="center">
+      <div id="azul">CAVOK</div>
+
+      <div id="verde">VISUAL</div>
+
+      <div id="amarelo">INSTRUMENTO</div>
+
+      </td>
+      <td align="center">
+      <br>
+
+
+      <form action="http://www.aisweb.intraer/" target="_blank" id="rotaer" method="get">
+        <input id="rotaer" value="AISWEB (ROTAER):" type="submit">
+        <input name="codigo" maxlength="4" onblur="this.value=this.value.toUpperCase()" style="text-transform: uppercase;" size="4" type="text">
+        <input name="lingua" value="pt-br" type="hidden">
+        <input name="i" value="aerodromos" type="hidden">
+      </form>
+
+
+      <form action="http://www.redemet.intraer?i=produtos&amp;p=consulta-de-mensagens-opmet" target="_blank" id="metar" method="post">
+        <input id="metar" value="METAR:" type="submit">
+        <input name="msg_localidade" maxlength="4" onblur="this.value=this.value.toUpperCase()" style="text-transform: uppercase;" size="4" type="text">
+        <input name="acao" value="localidade" type="hidden">
+        <input name="tipo_msg[]" value="metar" type="hidden">
+      </form>
+
+      <form action="http://www.aisweb.intraer/notam/rs.cfm" target="_blank" id="notam" method="post">
+        <input id="enviar" value="NOTAM:" type="submit">
+        <input name="codigo" maxlength="4" onblur="this.value=this.value.toUpperCase()" style="text-transform: uppercase;" size="4" type="text">
+        <input style="cursor: pointer;" maxlength="10" id="dt_i" class="dt_i tip" title="Data de in&Atilde;&shy;cio do intervalo" name="dt_i" type="hidden">
+        <input style="cursor: pointer;" maxlength="10" id="dt_f" class="dt_f tip" title="Data de t&Atilde;&copy;rmino do intervalo" name="dt_f" type="hidden">
+        <input name="fonte" value="N" type="hidden">
+        <input name="sup" value="1" type="hidden">
+        <input name="rs" value="1" type="hidden">
+      </form>
+      </td>
+      <td>
+    
+      <h1>Cartas Visuais (A)</h1>
+
+    
+      <ul>
+
+   <li><a href="visual/anexo1a.pdf" target="carta">REA - Anexo 1</a> </li>
+
+   <li><a href="visual/anexo2a.pdf" target="carta">REH Leste  - Anexo 2</a> </li>
+
+   <li><a href="visual/anexo3a.pdf" target="carta">REH Oeste  - Anexo 3</a> </li>
+
+   <li><a href="visual/anexo4a.pdf" target="carta">REH Centro - Anexo 4</a> </li>
+
+    
+      </ul>
+
+      </td>
+      <td>
+    
+      <h1>Cartas Visuais (B)</h1>
+
+    
+      <ul>
+
+   <li><a href="visual/anexo1b.pdf" target="carta">REA - Anexo 1</a> </li>
+
+   <li><a href="visual/anexo2b.pdf" target="carta">REH Leste  - Anexo 2</a> </li>
+
+   <li><a href="visual/anexo3b.pdf" target="carta">REH Oeste  - Anexo 3</a> </li>
+
+   <li><a href="visual/anexo4b.pdf" target="carta">REH Centro - Anexo 4</a> </li>
+
+    
+      </ul>
+
+      </td>
+      <td>
+   
+      <h1>Documentos</h1>
+
+   
+      <ul>
+
+   <li><a href="visual/REA-AnexoA.pdf" target="docs">REA - Anexo A</a> </li>
+
+   <li><a href="visual/REH-AnexoB.pdf" target="docs">REH - Anexo B</a> </li>
+
+   <li><a href="visual/VFR-RJ_AIC-N16_15.pdf" target="docs">VFR-RJ AIC-N16 2015</a> </li>
+
+   
+      </ul>
+
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+</body>
+</html>
