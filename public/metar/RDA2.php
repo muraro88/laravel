@@ -149,6 +149,9 @@ td { font-size:24pt; text-align:left; }
 
 <?php
 	error_reporting(1); //desabilita os erros
+	// reduzir tempo de bloqueio em streams e aumentar tempo máximo de execução
+	@ini_set('default_socket_timeout', 5);
+	@set_time_limit(120);
 
 	//Busca o resultado da busca	 
 	$METAR = "SBSC";
@@ -161,18 +164,21 @@ function tempo($METAR)
 	$ACAO = "consulta";
 	//$LOCAL = "www.redemet.intraer/old";  // 200.252.241.45 internet
 	$LOCAL = "redemet.decea.mil.br/old";  // 200.252.241.45 internetdecea
-	$echo("https://".$LOCAL."/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=".$METAR."&acao=localidade&tipo_msg[]=metar");
-
-	if (!$handle = fopen( "https://".$LOCAL."/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=".$METAR."&acao=localidade&tipo_msg[]=metar",'r'))
+	// montar URL uma vez e usar um contexto de stream com timeout (seguro para fopen)
+	$url = "https://" . $LOCAL . "/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=" . $METAR . "&acao=localidade&tipo_msg[]=metar";
+	echo $url;
+	$ctx = stream_context_create(array('http' => array('timeout' => 5)));
+	if (!($handle = @fopen($url, 'r', false, $ctx)))
 	{
 		$handle = fopen($METAR . ".txt", 'r');
 
-		while (!feof($handle))
-		{
-			$texto = fgets($handle , 4096);
-		}
+					while (!feof($handle))
+					{
+						$texto = fgets($handle , 4096);
+					}
 
-		fclose($texto);
+					// fechar o handle do arquivo local lido
+					fclose($handle);
         echo '<style type="text/css">';
         echo '<!--';
         echo 'body{background-color:red;color:white;font-size:32pt}';
