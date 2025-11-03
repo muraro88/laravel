@@ -268,23 +268,37 @@ $metarct = tempo("SBCT"); $corct = fechado($metarct);
 //checando data e hora
 function horacerta($dataS, $horaS)
 {
-	$DS=explode("/", $dataS);
-	$HS=explode(":", $horaS);
-	$sistema = "$HS[0],$HS[1],00,$DS[1],$DS[0],$DS[2]";
-	$data_c=mktime(date('H,i,s,m,d,Y')); //computador
-	$data_s=@mktime($sistema); //sistema
-	$teste = $data_c . " - " . $data_s;
+    $DS = explode("/", $dataS); // $DS[0]=dia, $DS[1]=mês, $DS[2]=ano
+    $HS = explode(":", $horaS); // $HS[0]=hora, $HS[1]=minuto
 
-	if (($data_c - $data_s) < 12000)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    // --- CORREÇÃO 1 ---
+    // A forma correta de pegar o timestamp atual é com a função time()
+    $data_c = time(); //computador
+
+    // --- CORREÇÃO 2 ---
+    // Você deve passar os argumentos separadamente para mktime(), e não como uma string.
+    // A ordem é: (hora, minuto, segundo, mês, dia, ano)
+    // Usamos (int) para garantir que os valores são numéricos.
+    $data_s = @mktime(
+        (int)$HS[0],    // hora
+        (int)$HS[1],    // minuto
+        0,              // segundo (você usou 00)
+        (int)$DS[1],    // mês
+        (int)$DS[0],    // dia
+        (int)$DS[2]     // ano
+    ); //sistema
+
+    $teste = $data_c . " - " . $data_s;
+
+    if (($data_c - $data_s) < 12000)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-
 // Online??
 
 $online=horacerta($data,$hora);
