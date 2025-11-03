@@ -287,7 +287,7 @@ function horacerta($dataS, $horaS)
 
 // Online??
 
-//$online=horacerta($data,$hora);
+$online=horacerta($data,$hora);
 $online = true;
  
 if (!$online){
@@ -326,7 +326,7 @@ function teste2($dataS, $horaS)
 	return $teste;
 }
 
-//$teste=teste2($data, $hora);
+$teste=teste2($data, $hora);
 
 ?>
 
