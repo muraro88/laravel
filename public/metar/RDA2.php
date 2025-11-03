@@ -156,12 +156,8 @@ td { font-size:24pt; text-align:left; }
 function tempo($METAR)
 {
     // Suas variáveis
-    $LOCAL = "redemet.decea.mil.br/old";  // Não usado mais, mas mantido
     $WEBHOOK = "https://app.alexmuraro.com.br/webhook/0d9d3170-c0ba-44fe-98ee-e50640351f9e?localidade=";
     $fallbackMessage = "Erro conexão"; // Mensagem de erro se tudo falhar
-
-    // Nome do arquivo local onde o METAR será salvo
-    $fileName = $METAR . ".txt";
 
     // 1. Construir a URL final do webhook
     $url = $WEBHOOK . $METAR;
@@ -175,28 +171,15 @@ function tempo($METAR)
     if ($texto !== false && !empty($texto))
     {
         // SUCESSO: A busca no webhook funcionou.
-        // 4. Salvar o conteúdo novo no arquivo local (ex: SBNT.txt)
-        // Isso atualiza o arquivo para a próxima vez.
-        file_put_contents($fileName, $texto);
+        // Retorna o texto novo diretamente.
+        return $texto;
     }
     else
     {
         // FALHA: Ocorreu um erro ao buscar no webhook.
-        // 5. Tentar ler o último conteúdo salvo no arquivo local
-        if (file_exists($fileName))
-        {
-            $texto = file_get_contents($fileName);
-        }
-        else
-        {
-            // Se o webhook falhou E o arquivo local não existe,
-            // retorna a mensagem de erro.
-            $texto = $fallbackMessage;
-        }
+        // Retorna a mensagem de erro.
+        return $fallbackMessage;
     }
-
-    // 6. Retornar o texto (seja o novo do webhook, o antigo do arquivo, ou a msg de erro)
-    return $texto;
 }
 
 function fechado($cond)
