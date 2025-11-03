@@ -164,7 +164,7 @@ function tempo($METAR)
 	$WEBHOOK = "https://app.alexmuraro.com.br/webhook/0d9d3170-c0ba-44fe-98ee-e50640351f9e?localidade=";
 
 	//$echo("https://".$LOCAL."/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=".$METAR."&acao=localidade&tipo_msg[]=metar");
-	https://api-redemet.decea.mil.br/mensagens/consulta/localidade?id_localidade[]=SBNT&type[]=metar&type[]=aviso&api_key=ouyaq0gZ4pEyTFIz86fJyby2snpspM66yU728dB2
+	//https://api-redemet.decea.mil.br/mensagens/consulta/localidade?id_localidade[]=SBNT&type[]=metar&type[]=aviso&api_key=ouyaq0gZ4pEyTFIz86fJyby2snpspM66yU728dB2
 	$handle = fopen($METAR . ".txt", 'r');
 
 	
