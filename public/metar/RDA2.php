@@ -330,14 +330,36 @@ if (!$online){
 
 function teste2($dataS, $horaS)
 {
-	$DS=explode("/",$dataS);
-	$HS=explode(":",$horaS);
-	$sistema = "$HS[0],$HS[1],00,$DS[1],$DS[0],$DS[2]";
-	$data_c=mktime(date('H,i,s,m,d,Y')); //computador
-	$data_s=@mktime($sistema); //sistema
-	$teste=$data_c." - ".$data_s."-".$sistema."-".date('H,i,s,m,d,Y');
-	$teste="";
-	return $teste;
+    $DS = explode("/", $dataS); // $DS[0]=dia, $DS[1]=mês, $DS[2]=ano
+    $HS = explode(":", $horaS); // $HS[0]=hora, $HS[1]=minuto
+    
+    // String de depuração (seu formato original)
+    $sistema = "$HS[0],$HS[1],00,$DS[1],$DS[0],$DS[2]";
+
+    // --- CORREÇÃO 1 ---
+    // Use time() para pegar o timestamp atual (segundos desde 1970)
+    $data_c = time(); //computador
+
+    // --- CORREÇÃO 2 ---
+    // Passe os argumentos como números inteiros separados
+    $data_s = @mktime(
+        (int)$HS[0],    // hora
+        (int)$HS[1],    // minuto
+        0,              // segundo (era "00")
+        (int)$DS[1],    // mês
+        (int)$DS[0],    // dia
+        (int)$DS[2]     // ano
+    ); //sistema
+
+    // A sua variável $teste estava sendo montada e logo depois apagada.
+    // Deixei a linha de depuração aqui com os valores corrigidos:
+    $teste = $data_c . " - " . $data_s . "-" . $sistema . "-" . date('H,i,s,m,d,Y');
+
+    // ATENÇÃO: Esta linha apaga todo o conteúdo da variável $teste.
+    // Talvez você queira remover esta linha se estiver tentando depurar.
+    $teste = ""; 
+    
+    return $teste;
 }
 
 $teste=teste2($data, $hora);
