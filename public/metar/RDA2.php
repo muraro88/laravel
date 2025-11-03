@@ -155,24 +155,48 @@ td { font-size:24pt; text-align:left; }
 
 function tempo($METAR)
 {
-    $handle = "Erro conexão";
-    $ID_REDEMET = "1";
-	$TAF = "";
-	$ACAO = "consulta";
-	//$LOCAL = "www.redemet.intraer/old";  // 200.252.241.45 internet
-	$LOCAL = "redemet.decea.mil.br/old";  // 200.252.241.45 internetdecea
-	$WEBHOOK = "https://app.alexmuraro.com.br/webhook/0d9d3170-c0ba-44fe-98ee-e50640351f9e?localidade=";
+    // Suas variáveis
+    $LOCAL = "redemet.decea.mil.br/old";  // Não usado mais, mas mantido
+    $WEBHOOK = "https://app.alexmuraro.com.br/webhook/0d9d3170-c0ba-44fe-98ee-e50640351f9e?localidade=";
+    $fallbackMessage = "Erro conexão"; // Mensagem de erro se tudo falhar
 
-	//$echo("https://".$LOCAL."/?i=produtos&p=consulta-de-mensagens-opmet&msg_localidade=".$METAR."&acao=localidade&tipo_msg[]=metar");
-	//https://api-redemet.decea.mil.br/mensagens/consulta/localidade?id_localidade[]=SBNT&type[]=metar&type[]=aviso&api_key=ouyaq0gZ4pEyTFIz86fJyby2snpspM66yU728dB2
-	$handle = fopen($METAR . ".txt", 'r');
+    // Nome do arquivo local onde o METAR será salvo
+    $fileName = $METAR . ".txt";
 
-	
-	$texto = fgets($handle , 4096);
-	$fp = fopen($METAR . ".txt", "w");
-	fwrite($fp, $texto);
-	fclose($fp);
-	return $texto;
+    // 1. Construir a URL final do webhook
+    $url = $WEBHOOK . $METAR;
+
+    // 2. Tentar buscar o conteúdo da URL do webhook
+    // O @ suprime erros para que possamos tratá-los manualmente
+    $texto = @file_get_contents($url);
+
+    // 3. Verificar se a busca na internet funcionou
+    // (Verifica se $texto NÃO é falso E se não veio vazio)
+    if ($texto !== false && !empty($texto))
+    {
+        // SUCESSO: A busca no webhook funcionou.
+        // 4. Salvar o conteúdo novo no arquivo local (ex: SBNT.txt)
+        // Isso atualiza o arquivo para a próxima vez.
+        file_put_contents($fileName, $texto);
+    }
+    else
+    {
+        // FALHA: Ocorreu um erro ao buscar no webhook.
+        // 5. Tentar ler o último conteúdo salvo no arquivo local
+        if (file_exists($fileName))
+        {
+            $texto = file_get_contents($fileName);
+        }
+        else
+        {
+            // Se o webhook falhou E o arquivo local não existe,
+            // retorna a mensagem de erro.
+            $texto = $fallbackMessage;
+        }
+    }
+
+    // 6. Retornar o texto (seja o novo do webhook, o antigo do arquivo, ou a msg de erro)
+    return $texto;
 }
 
 function fechado($cond)
